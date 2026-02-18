@@ -10,9 +10,10 @@ import 'screens/room_selection_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
-  // Run the seeding function immediately when the app starts
   // await seedHostelData();
 
   runApp(const MyApp());
@@ -20,7 +21,10 @@ void main() async {
 
 final _router = GoRouter(
   routes: [
-    GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
+    GoRoute(
+      path: '/',
+      builder: (context, state) => const HomeScreen(),
+    ),
     GoRoute(
       path: '/hostels',
       builder: (context, state) => const HostelListScreen(),
@@ -30,7 +34,10 @@ final _router = GoRouter(
       builder: (context, state) {
         final id = state.pathParameters['id']!;
         final data = state.extra as Map<String, dynamic>?;
-        return HostelDetailScreen(hostelId: id, hostelData: data);
+        return HostelDetailScreen(
+          hostelId: id,
+          hostelData: data,
+        );
       },
     ),
     GoRoute(
@@ -50,17 +57,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Hostel Reservation',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.green,
-          foregroundColor: Colors.white,
-        ),
-        useMaterial3: true,
-      ),
+      theme: ThemeData.dark(useMaterial3: true),
       debugShowCheckedModeBanner: false,
       routerConfig: _router,
     );
   }
 }
+
+
+   
